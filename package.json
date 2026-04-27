@@ -1,0 +1,33 @@
+{
+  "name": "aqa-cypress",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
+    "prepare": "husky"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ViraKramar/aqa-cypress.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ViraKramar/aqa-cypress/issues"
+  },
+  "homepage": "https://github.com/ViraKramar/aqa-cypress#readme",
+  "devDependencies": {
+    "cypress": "^15.14.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "prettier": "3.8.3"
+  },
+  "lint-staged": {
+    "*.{js,json,md}": "prettier --write"
+  }
+}
