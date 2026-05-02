@@ -6,6 +6,10 @@
   "scripts": {
     "cy:open": "cypress open",
     "cy:run": "cypress run",
+    "cy:run:qauto": "cypress run --config-file cypress.config.qauto.js",
+    "cy:run:qauto2": "cypress run --config-file cypress.config.qauto2.js",
+    "cy:open:qauto": "cypress open --config-file cypress.config.qauto.js",
+    "cy:open:qauto2": "cypress open --config-file cypress.config.qauto2.js",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "prepare": "husky"
@@ -25,6 +29,7 @@
     "cypress": "^15.14.1",
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
+    "mochawesome": "^7.1.4",
     "prettier": "3.8.3"
   },
   "lint-staged": {
