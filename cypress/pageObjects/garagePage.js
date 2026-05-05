@@ -1,77 +1,153 @@
 const availableBrands = ["Audi", "BMW", "Ford", "Porsche", "Fiat"];
 
 class GaragePage {
+  getGaragePageTitle() {
+    return cy.contains("h1", "Garage");
+  }
+
+  getAddCarButton() {
+    return cy.contains("button", "Add car");
+  }
+
+  getAddCarModal() {
+    return cy.get("app-add-car-modal");
+  }
+
+  getAddCarModalTitle() {
+    return cy.contains("h4", "Add a car");
+  }
+
+  getAddCarBrandSelect() {
+    return cy.get("#addCarBrand");
+  }
+
+  getBrandOption(brand) {
+    return cy.contains("option", brand);
+  }
+
+  getAddCarModelSelect() {
+    return cy.get("#addCarModel");
+  }
+
+  getModelOption(model) {
+    return cy.contains("option", model);
+  }
+
+  getAddCarMileageInput() {
+    return cy.get("#addCarMileage");
+  }
+
+  getAddButton() {
+    return cy.contains("button", "Add");
+  }
+
+  getCarNameText(carName) {
+    return cy.contains("p.car_name", carName);
+  }
+
+  getAddFuelExpenseButton() {
+    return cy.contains("button", "Add fuel expense");
+  }
+
+  getGarageSidebarButton() {
+    return cy.get('a.sidebar_btn[href="/panel/garage"]');
+  }
+
+  getCarEditButton() {
+    return cy.get("button.car_edit");
+  }
+
+  getEditCarModal() {
+    return cy.get("app-edit-car-modal");
+  }
+
+  getRemoveCarButton() {
+    return cy.contains("button", "Remove car");
+  }
+
+  getRemoveCarModal() {
+    return cy.get("app-remove-car-modal");
+  }
+
+  getRemoveButton() {
+    return cy.contains("button", "Remove");
+  }
+
+  getCarRemovedSuccessAlert() {
+    return cy.contains(".alert-success", "Car removed");
+  }
+
   visitGaragePage() {
     cy.url().should("include", "/panel/garage");
-    cy.contains("h1", "Garage").should("be.visible");
+    this.getGaragePageTitle().should("be.visible");
   }
 
   openAddCarModal() {
-    cy.contains("button", "Add car").should("be.visible").click();
+    this.getAddCarButton().should("be.visible").click();
   }
 
   addCar(brand, model, mileage) {
     this.openAddCarModal();
 
-    cy.get("app-add-car-modal").within(() => {
-      cy.contains("h4", "Add a car").should("be.visible");
+    this.getAddCarModal().within(() => {
+      this.getAddCarModalTitle().should("be.visible");
 
-      cy.get("#addCarBrand")
+      this.getAddCarBrandSelect()
         .should("be.visible")
         .within(() => {
           availableBrands.forEach((availableBrand) => {
-            cy.contains("option", availableBrand).should("exist");
+            this.getBrandOption(availableBrand).should("exist");
           });
         });
 
-      cy.get("#addCarBrand").select(brand);
+      this.getAddCarBrandSelect().select(brand);
 
-      cy.get("#addCarModel")
+      this.getAddCarModelSelect()
         .should("be.visible")
         .within(() => {
-          cy.contains("option", model).should("exist");
+          this.getModelOption(model).should("exist");
         });
 
-      cy.get("#addCarModel").select(model);
-      cy.get("#addCarMileage").should("be.visible").clear().type(mileage);
+      this.getAddCarModelSelect().select(model);
+      this.getAddCarMileageInput().should("be.visible").clear().type(mileage);
 
-      cy.contains("button", "Add").should("not.be.disabled").click();
+      this.getAddButton().should("not.be.disabled").click();
     });
   }
 
   assertCarIsAdded(carName) {
-    cy.contains("p.car_name", carName).should("be.visible");
+    this.getCarNameText(carName).should("be.visible");
   }
 
   openAddFuelExpenseModal(carName) {
-    cy.contains("p.car_name", carName)
+    this.getCarNameText(carName)
       .first()
       .closest("app-car")
       .within(() => {
-        cy.contains("button", "Add fuel expense").should("be.visible").click();
+        this.getAddFuelExpenseButton().should("be.visible").click();
       });
   }
 
   removeCar(carName) {
-    cy.get('a.sidebar_btn[href="/panel/garage"]').click();
+    this.getGarageSidebarButton().click();
     cy.url().should("include", "/panel/garage");
 
-    cy.contains("p.car_name", carName)
+    this.getCarNameText(carName)
       .first()
       .closest("app-car")
       .within(() => {
-        cy.get("button.car_edit").click();
+        this.getCarEditButton().click();
       });
 
-    cy.get("app-edit-car-modal").within(() => {
-      cy.contains("button", "Remove car").click();
+    this.getEditCarModal().within(() => {
+      this.getRemoveCarButton().click();
     });
 
-    cy.get("app-remove-car-modal").within(() => {
-      cy.contains("button", "Remove").click();
+    this.getRemoveCarModal().within(() => {
+      this.getRemoveButton().click();
     });
 
-    cy.contains(".alert-success", "Car removed").should("be.visible");
+    this.getCarRemovedSuccessAlert().should("be.visible");
   }
 }
 

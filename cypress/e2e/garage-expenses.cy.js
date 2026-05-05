@@ -54,7 +54,7 @@ describe("Garage and fuel expenses", () => {
 
     garagePage.openAddFuelExpenseModal(carName);
     expensesPage.addFuelExpense(carName, expenseMileage, liters, totalCost);
-    expensesPage.assertFuelExpenseIsAdded(expenseMileage, liters, totalCostPattern);
+    expensesPage.assertFuelExpenseIsAdded(carName, expenseMileage, liters, totalCostPattern);
 
     garagePage.removeCar(carName);
   });
