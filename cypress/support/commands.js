@@ -50,3 +50,11 @@ Cypress.Commands.add("login", (email, password) => {
   cy.url().should("include", "/panel/garage");
   cy.get("#userNavDropdown").should("be.visible").and("contain.text", "My profile");
 });
+
+Cypress.Commands.add("createExpense", (expenseData) => {
+  return cy.request({
+    method: "POST",
+    url: "/api/expenses",
+    body: expenseData,
+  });
+});
