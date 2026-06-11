@@ -13,7 +13,7 @@
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "prepare": "husky",
-    "cy:docker:firefox": "docker run --rm -v \"%cd%:/e2e\" -w /e2e cypress/included:13.14.2 --browser firefox --config-file cypress.config.qauto.js --spec cypress/e2e/header-footer.cy.js"
+    "cy:docker:firefox": "docker run --rm -v \"%cd%:/e2e\" -w /e2e cypress/included:13.14.2 --browser firefox --config-file cypress.config.qauto.js"
   },
   "repository": {
     "type": "git",
