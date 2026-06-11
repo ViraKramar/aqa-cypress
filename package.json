@@ -12,7 +12,8 @@
     "cy:open:qauto2": "cypress open --config-file cypress.config.qauto2.js",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
-    "prepare": "husky"
+    "prepare": "husky",
+    "cy:docker:firefox": "docker run --rm -v \"%cd%:/e2e\" -w /e2e cypress/included:13.14.2 --browser firefox --config-file cypress.config.qauto.js"
   },
   "repository": {
     "type": "git",
